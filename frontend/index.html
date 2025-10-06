@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RL Cleaning Robot Demo</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; }
+    canvas { border: 1px solid #444; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>Cleaning Robot RL Visualizer</h1>
+  <select id="algo">
+    <option>Q-learning</option>
+    <option>SARSA</option>
+    <option>Dyna-Q</option>
+    <option>TD-0</option>
+  </select>
+  <input id="rows" type="number" value="5" min="2"> × 
+  <input id="cols" type="number" value="5" min="2">
+  <input id="obs" type="number" value="3" min="0">
+  <button onclick="run()">Run</button>
+
+  <canvas id="grid" width="400" height="400"></canvas>
+  <script src="script.js"></script>
+</body>
+</html>
