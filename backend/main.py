@@ -1,12 +1,13 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from train_and_run import run_simulation
+import os
 
-# Create Flask app
+# Create the Flask app
 app = Flask(__name__)
 
-# Allow requests from your GitHub Pages domain
-CORS(app, origins=["https://yukkta-seelam.github.io"])
+# ✅ Allow GitHub Pages to call the Render backend
+CORS(app, origins=["https://yukkta-seelam.github.io"], supports_credentials=True)
 
 @app.route("/", methods=["POST"])
 def simulate():
@@ -18,12 +19,12 @@ def simulate():
         num_obstacles = int(data.get("obstacles", 2))
         episodes = int(data.get("episodes", 50))
 
-        # Run simulation
+        # Run simulation (replace with your real RL logic)
         frames = run_simulation(algorithm, (grid_rows, grid_cols), num_obstacles, episodes)
 
-        # Return as JSON response
         return jsonify({"frames": frames})
     except Exception as e:
+        print("❌ Backend error:", e)
         return jsonify({"error": str(e)}), 500
 
 
@@ -33,7 +34,6 @@ def ping():
 
 
 if __name__ == "__main__":
-    # Bind to 0.0.0.0 for Render and set PORT env var
-    import os
+    # ✅ Render needs the app to listen on 0.0.0.0 and PORT env var
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=port, debug=False)
