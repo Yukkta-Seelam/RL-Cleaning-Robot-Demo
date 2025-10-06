@@ -4,7 +4,7 @@ async function run() {
   const cols = parseInt(document.getElementById('cols').value);
   const obs = parseInt(document.getElementById('obs').value);
 
-  const res = await fetch('https://YOUR-BACKEND-URL.onrender.com/simulate', {
+  const res = await fetch('https://rl-cleaning-robot-demo.onrender.com', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
